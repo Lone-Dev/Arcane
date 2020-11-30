@@ -6,7 +6,7 @@ module.exports = {
     aliases: ['h'],
     description: "Let you see this",
     category: "🔰 Util",
-    usage: `${process.env.prefix}help [command]`,
+    usage: `${prefix.env.prefix}help [command]`,
     cooldown: 2,
     async execute(message, args, client) {
 
