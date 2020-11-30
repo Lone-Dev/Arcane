@@ -1,0 +1,27 @@
+{
+  "name": "arcane",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tear-Dev/Arcane.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tear-Dev/Arcane/issues"
+  },
+  "homepage": "https://github.com/Tear-Dev/Arcane#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "glob": "^7.1.6",
+    "nekos.life": "^2.0.7",
+    "path": "^0.12.7",
+    "table": "^6.0.4"
+  }
+}
