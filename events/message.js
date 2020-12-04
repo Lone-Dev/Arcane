@@ -45,6 +45,10 @@ module.exports = async (client, message) => {
         }
     }
 
+    if (client.commands.find((cmd) => cmd.nsfw === true && !message.channel.nsfw)) {
+        return message.channel.send(`This command can only be used in a nsfw channel.`)
+    }
+
     // init cooldown
     timestamps.set(message.author.id, now);
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);

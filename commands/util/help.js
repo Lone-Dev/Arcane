@@ -6,12 +6,13 @@ module.exports = {
     aliases: ['h'],
     description: "Let you see this",
     category: "🔰 Util",
-    usage: `${prefix.env.prefix}help [command]`,
+    usage: `;help [command]`,
     cooldown: 2,
+    nsfw: false,
     async execute(message, args, client) {
 
         const embed = new MessageEmbed()
-            .setColor(client.color);
+            .setColor('BLUE');
 
         const command = client.commands.get(args[1]);
 
@@ -28,7 +29,8 @@ module.exports = {
             **❯ Description:** \`${command.description || "No Description."}\`
             **❯ Category:** \`${command.category}\`
             **❯ Usage:** \`${command.usage || 'No Usage Info.'}\`
-            **❯ Cooldown:** \`${`${command.cooldown} second(s)` || "No Cooldown."}\``)
+            **❯ Cooldown:** \`${`${command.cooldown} second(s)` || "No Cooldown."}\`
+            **❯ NSFW:** \`${command.nsfw}\``)
         }
         else {
             const categories = removeDuplicates(client.commands.map(c => c.category));

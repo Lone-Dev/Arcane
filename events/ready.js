@@ -1,6 +1,15 @@
 const { createStream } = require('table')
+const mongoose = require('mongoose')
 
 module.exports = (client) => {
+
+    mongoose.connect(
+        process.env.mongoURL,
+        {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        }
+    );
 
     let config,
         stream;
