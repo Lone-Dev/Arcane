@@ -1,7 +1,24 @@
 const { createStream } = require('table')
 const mongoose = require('mongoose')
 
-module.exports = (client) => {
+module.exports = async (client) => {
+
+    let statuses = [`${client.guilds.cache.size} guilds.`, `${client.users.cache.size} users.`, `b/help for help`]
+
+    let i = 0;
+    // Every 15 seconds, update the status
+    setInterval(() => {
+        // Get the status
+        let status = statuses[i];
+        // If it's undefined, it means we reached the end of the array
+        if (!status) {
+            // Restart at the first status
+            status = statuses[0];
+            i = 0;
+        }
+        client.user.setActivity(status);
+        i++;
+    }, 2000);
 
     mongoose.connect(
         process.env.mongoURL,

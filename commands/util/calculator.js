@@ -9,9 +9,7 @@ module.exports = {
     nsfw: false,
     async execute(message, args, client) {
 
-        num1 = args[1], sum = args[2], num2 = args[3]
-
-        result = calculator(num1, sum, num2)
+        result = calculator(args[1], args[2], args[3])
 
         message.channel.send(result)
 
