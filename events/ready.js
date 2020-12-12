@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 module.exports = async (client) => {
 
-    let statuses = [`${client.guilds.cache.size} guilds.`, `${client.users.cache.size} users.`, `b/help for help`]
+    let statuses = [`${client.guilds.cache.size} guilds.`, `${client.users.cache.size} users.`, `${client.prefix} for help`]
 
     let i = 0;
     // Every 15 seconds, update the status
@@ -18,7 +18,7 @@ module.exports = async (client) => {
         }
         client.user.setActivity(status);
         i++;
-    }, 2000);
+    }, 15000);
 
     mongoose.connect(
         process.env.mongoURL,

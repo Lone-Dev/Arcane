@@ -1,10 +1,11 @@
 const Discord = require("discord.js");
+const { prefix } = require('../../../config.json')
 
 module.exports = {
     name: "hug",
     description: "Hug someone.",
     category: "🎈 Fun",
-    usage: `;hug [member]`,
+    usage: `${prefix}hug [member]`,
     cooldown: 2,
 
 

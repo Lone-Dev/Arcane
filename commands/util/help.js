@@ -1,12 +1,13 @@
 const { MessageEmbed } = require('discord.js')
 const { removeDuplicates } = require('../../database/functions')
+const { prefix } = require('../../config.json')
 
 module.exports = {
     name: "help",
     aliases: ['h'],
     description: "Let you see this",
     category: "🔰 Util",
-    usage: `;help [command]`,
+    usage: `${prefix}help [command]`,
     cooldown: 2,
     nsfw: false,
     async execute(message, args, client) {
@@ -34,7 +35,7 @@ module.exports = {
         }
         else {
             const categories = removeDuplicates(client.commands.map(c => c.category));
-            embed.setDescription(`For additional info on a command, use ${client.user} or \`;\` <command>`);
+            embed.setDescription(`For additional info on a command, use ${client.user} or \`${prefix}\` <command>`);
             embed.setFooter('<> is strict | [] is optional');
             embed.setThumbnail(client.user.displayAvatarURL())
 

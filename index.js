@@ -7,7 +7,8 @@ const Canvas = require('canvas')
 
 //Important things
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
-client.prefix = ';'
+const { prefix } = require('./config.json')
+client.prefix = prefix
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.login(process.env.token);

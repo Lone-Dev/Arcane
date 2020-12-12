@@ -1,11 +1,12 @@
 const Discord = require("discord.js");
 const Canvas = require('canvas')
+const { prefix } = require('../../config.json')
 
 module.exports = {
     name: "blush",
     description: "Let someone blush",
     category: "📜 Canvas",
-    usage: `${process.env.prefix}blush [member]`,
+    usage: `${prefix}blush [member]`,
     cooldown: 6,
 
     async execute(message, args, client) {

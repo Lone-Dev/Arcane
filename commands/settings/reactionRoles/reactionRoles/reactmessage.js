@@ -1,11 +1,12 @@
 const Discord = require("discord.js");
 const reactChannel = require('../../../../database/models/reactChannel');
+const { prefix } = require('../../../../config.json')
 
 module.exports = {
     name: "reactmessage",
     description: "Send the reaction roles message in your specefied channel.",
     category: "⚙ Settings",
-    usage: `;reactmessage`,
+    usage: `${prefix}reactmessage`,
     cooldown: 2,
 
     async execute(message, args, client) {
