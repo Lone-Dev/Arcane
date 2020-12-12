@@ -1,6 +1,6 @@
 const discord = require("discord.js");
-const nekoClient = require('nekos.life');
-const neko = new nekoClient()
+const loneClient = require('lone.wolfs');
+const lone = new loneClient()
 
 module.exports = async (client, message) => {
 
@@ -39,7 +39,7 @@ module.exports = async (client, message) => {
             return message.channel.send(
                 `❌  ${message.author}, please wait \`${timeLeft.toFixed(
                     1
-                )}\` more second${timeLeft == 1 ? "" : "s"} before reusing the \`${command.name
+                )}\` more second ${timeLeft == 1 ? "s" : ""} before reusing the \`${command.name
                 }\` command.`
             );
         }
@@ -53,5 +53,5 @@ module.exports = async (client, message) => {
     timestamps.set(message.author.id, now);
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-    command.execute(message, args, client, neko)
+    command.execute(message, args, client, lone)
 } 

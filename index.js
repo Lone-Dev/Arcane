@@ -5,10 +5,8 @@ const Discord = require('discord.js');
 const glob = require('glob');
 const Canvas = require('canvas')
 
-const welcomeMessage = require('./database/models/welcomeMessage');
-
 //Important things
-const client = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] });
+const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 client.prefix = ';'
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
@@ -27,6 +25,56 @@ for (const file of eventFiles) {
     const eventName = /\/events.(.*).js/.exec(file)[1];
     client.on(eventName, event.bind(null, client));
 }
+
+
+const reactChannel = require('./database/models/reactChannel')
+client.on('messageReactionAdd', async (reaction, user) => {
+
+    reactChannel.findOne({ GuildID: reaction.message.guild.id }, async (err, data12) => {
+
+        if (!data12) return
+
+        if (reaction.message.partial) await reaction.message.fetch();
+        if (reaction.partial) await reaction.fetch();
+        if (user.bot) return;
+
+        const rolesRed = reaction.message.guild.roles.cache.find(r => r.name === "Red")
+        if (!rolesRed) return
+        const rolesBlue = reaction.message.guild.roles.cache.find(r => r.name === "Blue")
+        if (!rolesBlue) return
+
+        if (reaction.message.channel.id === data12.ChannelID) {
+            if (reaction.emoji.name === '🔴') await reaction.message.guild.members.cache.get(user.id).roles.add(rolesRed.id)
+            if (reaction.emoji.name === '🔵') await reaction.message.guild.members.cache.get(user.id).roles.add(rolesBlue.id)
+        }
+    })
+});
+
+client.on('messageReactionRemove', async (reaction, user) => {
+
+    reactChannel.findOne({ GuildID: reaction.message.guild.id }, async (err, data12) => {
+
+        if (!data12) return
+
+        if (reaction.message.partial) await reaction.message.fetch();
+        if (reaction.partial) await reaction.fetch();
+        if (user.bot) return;
+
+        const rolesRed = reaction.message.guild.roles.cache.get(r => r.name === "Red")
+        if (!rolesRed) return
+        const rolesBlue = reaction.message.guild.roles.cache.get(r => r.name === "Blue")
+        if (!rolesBlue) return
+
+        if (reaction.message.channel.id === data12.ChannelID) {
+            if (reaction.emoji.name === '🔴') await reaction.message.guild.members.cache.get(user.id).roles.remove(rolesRed.id)
+            if (reaction.emoji.name === '🔵') await reaction.message.guild.members.cache.get(user.id).roles.remove(rolesBlue.id)
+        }
+    })
+})
+
+
+
+
 
 // client.on('guildMemberAdd', async (member) => {
 
