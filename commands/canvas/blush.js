@@ -1,19 +1,19 @@
 const Discord = require("discord.js");
 const Canvas = require('canvas')
-const { prefix } = require('../../config.json')
 
 module.exports = {
     name: "blush",
     description: "Let someone blush",
     category: "📜 Canvas",
-    usage: `${prefix}blush [member]`,
+    usage: `${process.env.prefix}blush [member]`,
     cooldown: 6,
+    nsfw: false,
 
     async execute(message, args, client) {
         const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find((x) => x.user.username === args.slice(0).join(" ") || x.user.username === args[0]);
         if (member) var avatarMember = member.user
         if (!member) var avatarMember = message.author
-        const canvas = Canvas.createCanvas(900, 900);
+        const canvas = Canvas.createCanvas(512, 512);
         const ctx = canvas.getContext('2d');
 
         const avatar = await Canvas.loadImage(avatarMember.displayAvatarURL({ format: 'jpg', dynamic: true }));

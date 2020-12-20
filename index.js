@@ -7,8 +7,8 @@ const Canvas = require('canvas')
 
 //Important things
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
-const { prefix } = require('./config.json')
-client.prefix = prefix
+const { xp } = require('./database/functions');
+client.prefix = process.env.prefix
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.login(process.env.token);
@@ -27,55 +27,32 @@ for (const file of eventFiles) {
     client.on(eventName, event.bind(null, client));
 }
 
+client.on('message', async message => {
+    if (message.author.bot) return
 
-const reactChannel = require('./database/models/reactChannel')
-client.on('messageReactionAdd', async (reaction, user) => {
+    if (!message.guild) {
+        if (message.author.bot) return
+        const modMailargs = message.content.trim().split(/ +g/);
+        const modMailMessage = modMailargs.slice(0).join(' ')
 
-    reactChannel.findOne({ GuildID: reaction.message.guild.id }, async (err, data12) => {
+        const modMail = new Discord.MessageEmbed()
+            .setTitle(`Message from ${message.author.tag} (${message.author.id})`)
+            .setDescription(modMailMessage)
 
-        if (!data12) return
+        const channel = client.channels.cache.get(process.env.modmail)
 
-        if (reaction.message.partial) await reaction.message.fetch();
-        if (reaction.partial) await reaction.fetch();
-        if (user.bot) return;
+        channel.send(modMail).then(async () => {
+            const embed = new Discord.MessageEmbed()
+                .setTitle(`Your message has been recieved`)
+                .setDescription(`While you wait, please describe your issue in detail. Do not spam the ModMail System or you will be banned from using our bot.\n- Invite the bot [here](https://discord.com/api/oauth2/authorize?client_id=779469323843534900&permissions=8&scope=bot)\n- Join support server [here](https://discord.gg/upG8yF7aaz)`)
 
-        const rolesRed = reaction.message.guild.roles.cache.find(r => r.name === "Red")
-        if (!rolesRed) return
-        const rolesBlue = reaction.message.guild.roles.cache.find(r => r.name === "Blue")
-        if (!rolesBlue) return
+            message.author.send(embed)
+        }).catch(err => client.channels.cache.get(process.env.errChannel).send(err))
 
-        if (reaction.message.channel.id === data12.ChannelID) {
-            if (reaction.emoji.name === '🔴') await reaction.message.guild.members.cache.get(user.id).roles.add(rolesRed.id)
-            if (reaction.emoji.name === '🔵') await reaction.message.guild.members.cache.get(user.id).roles.add(rolesBlue.id)
-        }
-    })
-});
+    }
 
-client.on('messageReactionRemove', async (reaction, user) => {
-
-    reactChannel.findOne({ GuildID: reaction.message.guild.id }, async (err, data12) => {
-
-        if (!data12) return
-
-        if (reaction.message.partial) await reaction.message.fetch();
-        if (reaction.partial) await reaction.fetch();
-        if (user.bot) return;
-
-        const rolesRed = reaction.message.guild.roles.cache.get(r => r.name === "Red")
-        if (!rolesRed) return
-        const rolesBlue = reaction.message.guild.roles.cache.get(r => r.name === "Blue")
-        if (!rolesBlue) return
-
-        if (reaction.message.channel.id === data12.ChannelID) {
-            if (reaction.emoji.name === '🔴') await reaction.message.guild.members.cache.get(user.id).roles.remove(rolesRed.id)
-            if (reaction.emoji.name === '🔵') await reaction.message.guild.members.cache.get(user.id).roles.remove(rolesBlue.id)
-        }
-    })
+    xp(message)
 })
-
-
-
-
 
 // client.on('guildMemberAdd', async (member) => {
 

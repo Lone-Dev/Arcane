@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "hug",
-    description: "Hug someone.",
+    name: "baka",
+    description: "Baka someone.",
     category: "🎈 Fun",
-    usage: `${process.env.prefix}hug [member]`,
+    usage: `${process.env.prefix}baka [member]`,
     cooldown: 2,
     nsfw: false,
 
@@ -14,12 +14,10 @@ module.exports = {
             || message.guild.members.cache.get(args[1])
 
 
-        if (!member) return message.channel.send(`Who do you want to hug.`)
-
-        let result = await lone.sfw.hug();
+        let result = await lone.sfw.baka();
 
         const embed = new Discord.MessageEmbed()
-            .setDescription(`_Eeep- **${member.user.username}**! You're getting hugged by **${message.author.username}**!_`)
+            .setDescription(`${member ? `**${member.user.username}** you are getting a baka` : 'BAKAAAAAAA'}`)
             .setImage(result.url)
 
         message.channel.send(embed)

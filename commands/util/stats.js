@@ -1,16 +1,16 @@
-const { stats } = require('discord-bukket')
-const { prefix } = require('../../config.json')
+// const { stats } = require('discord-bukket')
 
 module.exports = {
     name: "stats",
     description: "View the stats of the bot.",
     category: "🔰 Util",
-    usage: `${prefix}stats`,
+    usage: `${process.env.prefix}stats`,
     cooldown: 2,
     nsfw: false,
+
     async execute(message, args, client) {
 
-        stats(client, message)
+        // stats(client, message)
 
     }
 };

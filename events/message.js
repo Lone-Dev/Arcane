@@ -1,18 +1,25 @@
 const discord = require("discord.js");
 const loneClient = require('lone.wolfs');
 const lone = new loneClient()
+const blacklistUserModel = require('../database/models/blacklistUser')
+const blacklistGuildModel = require('../database/models/blacklistGuild')
 
 module.exports = async (client, message) => {
+
+    let blacklistedUser = await blacklistUserModel.findOne({ userID: message.author.id })
+    if (blacklistedUser) return
+    let blacklistedGuild = await blacklistGuildModel.findOne({ guildID: message.guild.id })
+    if (blacklistedGuild) return
 
     const mentionRegex = RegExp(`^<@!${client.user.id}>$`);
     const mentionRegexPrefix = RegExp(`^<@!${client.user.id}> `);
 
     const prefix = message.content.match(mentionRegexPrefix) ?
-        message.content.match(mentionRegexPrefix)[0] : client.prefix;
+        message.content.match(mentionRegexPrefix)[0] : process.env.prefix;
 
     if (message.content.match(mentionRegex)) message.channel.send(`My prefix is \`${client.prefix}\` and ${client.user}.`);
 
-    if (message.author.bot || !message.guild) return;
+    if (message.author.bot) return;
 
     if (!message.content.toLowerCase().startsWith(prefix)) return;
 

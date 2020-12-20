@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
-const { prefix } = require('../../config.json')
 
 module.exports = {
     name: "avatar",
     aliases: ['pf', 'profilepic', 'profilepicture'],
     description: "Get an avatar of someone.",
     category: "🔰 Util",
-    usage: `${prefix}avatar [member]`,
+    usage: `${process.env.prefix}avatar [member]`,
     cooldown: 6,
+    nsfw: false,
 
     async execute(message, args, client) {
 
