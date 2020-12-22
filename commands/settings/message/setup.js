@@ -20,9 +20,20 @@ module.exports = {
 
         message.channel.awaitMessages(filter, { max: 1 }).then(answer => {
 
-            const mentionedChannel = answer.first().mentions.channels.first() || client.channels.cache.get(answer.first().content)
+            if (answer.first().content === 'cancel') {
+                msg.delete()
+                return message.channel.send(`Canceled the setup.`)
 
-            msg.edit(`So <#${mentionedChannel.id}>? ok ok..`)
+            } else {
+
+                const mentionedChannel = answer.first().mentions.channels.first() || client.channels.cache.get(answer.first().content)
+
+                msg.edit(`So ${mentionedChannel}? ok ok..`)
+
+                setTimeout(function () {
+                    msg.edit(``)
+                }, 1500)
+            }
 
         })
 

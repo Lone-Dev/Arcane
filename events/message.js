@@ -1,6 +1,5 @@
 const discord = require("discord.js");
-const loneClient = require('lone.wolfs');
-const lone = new loneClient()
+const activeSongs = new Map();
 const blacklistUserModel = require('../database/models/blacklistUser')
 const blacklistGuildModel = require('../database/models/blacklistGuild')
 
@@ -60,5 +59,9 @@ module.exports = async (client, message) => {
     timestamps.set(message.author.id, now);
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-    command.execute(message, args, client, lone)
+    var options = {
+        active: activeSongs
+    };
+
+    command.execute(message, args, client, options)
 } 

@@ -1,4 +1,4 @@
-const discordString = require('discord-strings');
+const discordStrings = require('discord-strings');
 
 module.exports = {
     name: 'string',
@@ -11,7 +11,7 @@ module.exports = {
     async execute(message, args, client) {
 
 
-        const x = discordString({
+        const x = discordStrings({
             lenght: 5,
             numeric: true,
             letter: true,
