@@ -17,20 +17,9 @@ module.exports = {
 
         const command = client.commands.get(args[1]); // Making command arging
 
-        if (!command) { // If the command doesn't exist
-            const categories = removeDuplicates(client.commands.map(c => c.category));
-            embed.setDescription(`For additional info on a command, use ${client.user} or \`${process.env.prefix}\` <command>`);
-            embed.setFooter('<> is strict | [] is optional');
-            embed.setThumbnail(client.user.displayAvatarURL())
-
-            for (const category of categories) {
-                embed.addField(`❯  ${category}`, client.commands.filter(c => c.category === category).map(c => `\`${c.name}\``).join(' '));
-            }
-        }
-
         var _aliases = '\`No Aliases.\`'
 
-        if (command) { // If the command exist
+        if (args[1] && command) { // If the command exist
             embed.setAuthor(`${command.name}`, client.user.displayAvatarURL());
             embed.setThumbnail(client.user.displayAvatarURL())
             embed.setFooter('<> is strict | [] is optional');
@@ -43,6 +32,15 @@ module.exports = {
             **❯ Usage:** \`${command.usage || 'No Usage Info.'}\`
             **❯ Cooldown:** \`${`${command.cooldown} second(s)` || "No Cooldown."}\`
             **❯ NSFW:** \`${command.nsfw}\``)
+        } else {
+            const categories = removeDuplicates(client.commands.map(c => c.category));
+            embed.setDescription(`For additional info on a command, use ${client.user} or \`${process.env.prefix}\` <command>`);
+            embed.setFooter('<> is strict | [] is optional');
+            embed.setThumbnail(client.user.displayAvatarURL())
+
+            for (const category of categories) {
+                embed.addField(`❯  ${category}`, client.commands.filter(c => c.category === category).map(c => `\`${c.name}\``).join(' '));
+            }
         }
 
         message.channel.send({ embed: embed }); // Send the embed.

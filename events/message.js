@@ -1,22 +1,27 @@
 const discord = require("discord.js");
-const activeSongs = new Map();
 const blacklistUserModel = require('../database/models/blacklistUser')
 const blacklistGuildModel = require('../database/models/blacklistGuild')
+const guildPrefixFind = require('../database/models/guildPrefix')
 
 module.exports = async (client, message) => {
+
+    let prefixs = process.env.prefix
 
     let blacklistedUser = await blacklistUserModel.findOne({ userID: message.author.id })
     if (blacklistedUser) return
     let blacklistedGuild = await blacklistGuildModel.findOne({ guildID: message.guild.id })
     if (blacklistedGuild) return
+    let guildPrefix = await guildPrefixFind.findOne({ guildID: message.guild.id })
+    if (guildPrefix) prefixs = guildPrefix.prefix
+
 
     const mentionRegex = RegExp(`^<@!${client.user.id}>$`);
     const mentionRegexPrefix = RegExp(`^<@!${client.user.id}> `);
 
     const prefix = message.content.match(mentionRegexPrefix) ?
-        message.content.match(mentionRegexPrefix)[0] : process.env.prefix;
+        message.content.match(mentionRegexPrefix)[0] : prefixs;
 
-    if (message.content.match(mentionRegex)) message.channel.send(`My prefix is \`${client.prefix}\` and ${client.user}.`);
+    if (message.content.match(mentionRegex)) message.channel.send(`My prefix is \`${prefix}\` and ${client.user}.`);
 
     if (message.author.bot) return;
 
@@ -59,9 +64,5 @@ module.exports = async (client, message) => {
     timestamps.set(message.author.id, now);
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-    var options = {
-        active: activeSongs
-    };
-
-    command.execute(message, args, client, options)
+    command.execute(message, args, client)
 } 

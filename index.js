@@ -7,6 +7,7 @@ const Canvas = require('canvas')
 
 //Important things
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+client.queue = new Map();
 const { xp } = require('./database/functions');
 client.prefix = process.env.prefix
 client.commands = new Discord.Collection();

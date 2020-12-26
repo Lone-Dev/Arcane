@@ -1,4 +1,4 @@
-// const { color } = require('discord-bukket')
+const { color } = require('discord-yui')
 
 module.exports = {
     name: 'color',
@@ -10,7 +10,6 @@ module.exports = {
 
     async execute(message, args, client) {
 
-        // color(message)
-
+        //color(message, message.channel)
     }
 };

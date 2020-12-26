@@ -1,3 +1,5 @@
+const play = require('../commands/music/play');
+
 module.exports = (client) = {
 
     constructor(client) {
@@ -74,5 +76,5 @@ module.exports = (client) = {
             db.subtract(`guild_${message.guild.id}_xp_${message.author.id}`, xpNeeded)
             message.channel.send(`${message.author}, You have leveled up to level **${newLevel}**`)
         }
-    }
+    },
 }
