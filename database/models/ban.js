@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
-const warn = mongoose.Schema({
+const ban = mongoose.Schema({
     guildID: String,
     memberID: String,
-    warnings: Array,
+    bans: Array,
     moderator: Array,
     date: Array
 })
 
-module.exports = mongoose.model('warn', warn, "warnings")
+module.exports = mongoose.model('ban', ban, "bans")

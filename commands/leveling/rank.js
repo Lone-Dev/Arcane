@@ -5,7 +5,7 @@ module.exports = {
     name: "rank",
     description: "See your or someone else its rank",
     category: "📊 Leveling",
-    usage: `${process.env.prefix}rank [member]"`,
+    usage: `[member]"`,
     cooldown: 6,
     nsfw: false,
 

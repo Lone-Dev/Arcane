@@ -6,7 +6,7 @@ module.exports = {
     name: "hug",
     description: "Hug someone.",
     category: "🎈 Fun",
-    usage: `${process.env.prefix}hug [member]`,
+    usage: `[member]`,
     cooldown: 2,
     nsfw: false,
 

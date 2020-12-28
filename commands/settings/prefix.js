@@ -4,7 +4,7 @@ module.exports = {
     name: "prefix",
     description: "Set an custom prefix for you guild",
     category: "⚙ Settings",
-    usage: `${process.env.prefix}prefix <prefix>`,
+    usage: `<prefix>`,
     cooldown: 2,
     nsfw: false,
 

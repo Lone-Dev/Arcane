@@ -4,7 +4,7 @@ module.exports = {
     name: "setup",
     description: "Just setup me",
     category: "⚙ Settings",
-    usage: `${process.env.prefix}setup`,
+    usage: `No usage.`,
     cooldown: 2,
     nsfw: false,
 

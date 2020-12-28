@@ -3,7 +3,6 @@ require('dotenv').config();
 //Import npms
 const Discord = require('discord.js');
 const glob = require('glob');
-const Canvas = require('canvas')
 
 //Important things
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });

@@ -5,7 +5,7 @@ module.exports = {
     name: "gay",
     description: "Let someone be gay",
     category: "📜 Canvas",
-    usage: `${process.env.prefix}gay [member]`,
+    usage: `[member]`,
     cooldown: 6,
     nsfw: false,
 

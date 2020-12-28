@@ -5,7 +5,7 @@ module.exports = {
     name: "wanted",
     description: "Gives an picture of someone thats wanted.",
     category: "📜 Canvas",
-    usage: `${process.env.prefix}wanted [member]`,
+    usage: `[member]`,
     cooldown: 6,
     nsfw: false,
 

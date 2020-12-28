@@ -7,7 +7,7 @@ module.exports = {
     name: "blacklist",
     description: "Add a guild or user to the blacklist.js",
     category: "☎ Support",
-    usage: `${process.env.prefix}blacklist <user/guild> <add/remove> <user> [reason]`,
+    usage: `<user/guild> <add/remove> <user> [reason]`,
     cooldown: 2,
     nsfw: false,
 

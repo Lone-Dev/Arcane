@@ -5,7 +5,7 @@ module.exports = {
     name: "blush",
     description: "Let someone blush",
     category: "📜 Canvas",
-    usage: `${process.env.prefix}blush [member]`,
+    usage: `[member]`,
     cooldown: 6,
     nsfw: false,
 

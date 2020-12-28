@@ -4,7 +4,7 @@ module.exports = {
     name: "modmail",
     description: "ModMail someone (support team only)",
     category: "☎ Support",
-    usage: `${process.env.prefix}modmail`,
+    usage: `modmail <person>`,
     cooldown: 2,
     nsfw: false,
 

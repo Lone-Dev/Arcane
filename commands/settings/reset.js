@@ -4,7 +4,7 @@ module.exports = {
     name: "reset",
     description: "Reset some settings.",
     category: "⚙ Settings",
-    usage: `${process.env.prefix}reset <thing>`,
+    usage: `<thing>`,
     cooldown: 2,
     nsfw: false,
 
